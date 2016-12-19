@@ -1,0 +1,88 @@
+import System
+import System.Web
+import System.Web.SessionState
+import System.Web.UI
+import System.Web.UI.Page
+import System.Net
+import System.IO
+import System.Text
+static def GetAttributeValue(Request):
+	tablica = []
+	cookies = CookieContainer()
+	request = HttpWebRequest.Create('http://192.168.187.135/Test1.WebAccess/wd/Logon/Logon.rails') as HttpWebRequest
+	request.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
+	request.Method = 'GET'
+	request.CookieContainer = cookies
+	response1 = (request.GetResponse() as HttpWebResponse)
+	response1.Close()
+	Logingrequest as HttpWebRequest = HttpWebRequest.Create('http://192.168.187.135/Test1.WebAccess/wd/Logon/Logon.rails')
+	Logingrequest.Method = 'POST'
+	Logingrequest.CookieContainer = cookies
+	Logingrequest.Credentials = CredentialCache.DefaultCredentials
+	Logingrequest.ContentType = 'application/x-www-form-urlencoded'
+	Logingrequest.KeepAlive= true
+	Logingrequest.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+	Logingrequest.Headers.Add("Accept-Encoding", "gzip,deflate")
+	Logingrequest.Headers.Add("Accept-Language" ,"pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4")
+	Logingrequest.Headers.Add("X-Requested-With","XMLHttpRequest")               
+	Logingrequest.Referer = 'http://192.168.187.135/Test1.WebAccess/wd/Logon/Logon.rails' (http://192.168.187.135/Test1.WebAccess/wd/Logon/Logon.rails%27) 
+	Logingrequest.ServicePoint.Expect100Continue = false
+	Logingrequest.AllowAutoRedirect = true;
+	Logingrequest.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
+	postData = 'Ecom_User_ID=sa&Ecom_User_Password=administrator'
+	byteArray as (byte) = Encoding.ASCII.GetBytes(postData)
+	Logingrequest.ContentLength = postData.Length
+	Logingrequest.AutomaticDecompression = DecompressionMethods.GZip
+	dataStream as Stream = Logingrequest.GetRequestStream()
+	dataStream.Write(byteArray,0,byteArray.Length)
+	//dataStream.Close()
+	response as HttpWebResponse = Logingrequest.GetResponse()
+	data = response.GetResponseStream()
+	Logingrequest1 as HttpWebRequest = HttpWebRequest.Create('http://192.168.187.135/Test1.WebAccess/object/save.rails')
+	Logingrequest1.Method = 'POST'
+	Logingrequest1.CookieContainer = cookies
+	Logingrequest1.Credentials = CredentialCache.DefaultCredentials
+	Logingrequest1.ContentType = 'application/x-www-form-urlencoded'
+	Logingrequest1.KeepAlive= true
+	Logingrequest1.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+	Logingrequest1.Headers.Add("Accept-Encoding", "gzip,deflate")
+	Logingrequest1.Headers.Add("Accept-Language" ,"pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4")
+	Logingrequest1.Headers.Add("X-Requested-With","XMLHttpRequest")               
+	Logingrequest1.Referer = 'http://192.168.187.135/Test1.WebAccess/wd/Logon/Logon.rails' (http://192.168.187.135/Test1.WebAccess/wd/Logon/Logon.rails%27) 
+	Logingrequest1.ServicePoint.Expect100Continue = false
+	Logingrequest1.AllowAutoRedirect = true;
+	Logingrequest1.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
+	//dataStream1 as Stream = Logingrequest1.GetRequestStream()
+	postData1 = 'Text=note text&class_name=RequestManagement.Note&is_new=true&parent_class_name=RequestManagement.Request&parent_key='+Request.Guid.ToString()+'&parent_function_name=AddNote'
+	byteArray1 as (byte) = Encoding.ASCII.GetBytes(postData1)
+	Logingrequest1.ContentLength = postData1.Length
+	Logingrequest1.AutomaticDecompression = DecompressionMethods.GZip
+	dataStream1 as Stream = Logingrequest1.GetRequestStream()
+	dataStream1.Write(byteArray1,0,byteArray1.Length)
+	dataStream1.Close()
+	response11 as HttpWebResponse = Logingrequest1.GetResponse()
+	data1 = response11.GetResponseStream()
+	//data1.Close()
+	LogOff as HttpWebRequest = HttpWebRequest.Create('http://192.168.187.135//Test1.WebAccess/wd/Logon/Logoff.rails')
+	LogOff.Method = 'POST'
+	LogOff.CookieContainer = cookies
+	LogOff.Credentials = CredentialCache.DefaultCredentials
+	LogOff.ContentType = 'application/x-www-form-urlencoded'
+	LogOff.KeepAlive= true
+	LogOff.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+	LogOff.Headers.Add("Accept-Encoding", "gzip,deflate")
+	LogOff.Headers.Add("Accept-Language" ,"pl-PL,pl;q=0.8,en-US;q=0.6,en;q=0.4")
+	LogOff.Headers.Add("X-Requested-With","XMLHttpRequest")               
+	LogOff.Referer = 'http://192.168.187.135/Test1.WebAccess/wd/Logon/Logon.rails' (http://192.168.187.135/Test1.WebAccess/wd/Logon/Logon.rails%27) 
+	LogOff.ServicePoint.Expect100Continue = false
+	LogOff.AllowAutoRedirect = true;
+	LogOff.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36"
+	postData11 = ''
+	byteArray11 as (byte) = Encoding.ASCII.GetBytes(postData11)
+	LogOff.ContentLength = postData11.Length
+	LogOff.AutomaticDecompression = DecompressionMethods.GZip
+	dataStream111 as Stream = LogOff.GetRequestStream()
+	dataStream111.Write(byteArray11,0,byteArray11.Length)
+	dataStream111.Close()
+
+	return 'hyhyhyh' 
